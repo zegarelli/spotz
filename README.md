@@ -21,3 +21,4 @@ _The front-facing React part_
 ## Ref Links
 - [React Tutorial Walkthrough](http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/) (uses different DB, but very useful as a primer)
 - [React Frontend and Node+Express Backend Tutorial](https://www.freecodecamp.org/news/create-a-react-frontend-a-node-express-backend-and-connect-them-together-c5798926047c/)
+- [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
