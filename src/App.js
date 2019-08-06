@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { getPlaces } from './services/spots_service'
 
 class App extends Component {
   constructor (props) {
     super(props)
-    this.state = { apiResponse: '' }
+    this.state = {
+      apiResponse: '',
+      places: ''
+    }
   }
 
   callAPI () {
@@ -19,12 +23,23 @@ class App extends Component {
     this.callAPI()
   }
 
+  askForPlaces () {
+    try {
+      const places = await getPlaces()
+      console.log(places)
+      this.setState({ places: places })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   render () {
     return (
       <div className='App'>
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to React</h1>
+          <button onClick={this.askForPlaces}>Get Places</button>
+          <pre>{JSON.stringify(this.state.places, null, 2)}</pre>
           <h2 className='App-intro'>{this.state.apiResponse}</h2>
         </header>
       </div>
