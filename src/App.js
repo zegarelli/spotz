@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
 import { getPlaces } from './services/spots_service'
-
+import PlaceCard from './components/PlaceCard'
 class App extends Component {
   constructor (props) {
     super(props)
@@ -38,7 +36,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
+          <PlaceCard />
           <button onClick={this.askForPlaces}>Get Places</button>
           <pre>{JSON.stringify(this.state.places, null, 2)}</pre>
           <h2 className='App-intro'>{this.state.apiResponse}</h2>
