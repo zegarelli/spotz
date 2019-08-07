@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { getPlaces } from './services/spots_service'
 import PlaceCard from './components/PlaceCard'
+import Menu from './components/Menu'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -36,6 +38,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App-header'>
+          <Menu />
           <PlaceCard />
           <button onClick={this.askForPlaces}>Get Places</button>
           <pre>{JSON.stringify(this.state.places, null, 2)}</pre>
