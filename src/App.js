@@ -10,6 +10,7 @@ class App extends Component {
       apiResponse: '',
       places: ''
     }
+    this.askForPlaces = this.askForPlaces.bind(this)
   }
 
   callAPI () {
@@ -23,10 +24,10 @@ class App extends Component {
     this.callAPI()
   }
 
-  askForPlaces () {
+  async askForPlaces () {
     try {
       const places = await getPlaces()
-      console.log(places)
+      console.log(places.body)
       this.setState({ places: places })
     } catch (err) {
       console.error(err)
