@@ -12,15 +12,19 @@ export default class MenuInst extends Component {
     return (
       <Menu>
         <Menu.Item
-          name='editorials'
-          active={activeItem === 'editorials'}
+          name='home'
+          active={activeItem === 'home'}
           onClick={this.handleItemClick}
         >
-          Editorials
+          Home
         </Menu.Item>
 
-        <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick}>
-          Reviews
+        <Menu.Item name='places' active={activeItem === 'places'} onClick={this.handleItemClick}>
+          Places
+        </Menu.Item>
+
+        <Menu.Item name='activities' active={activeItem === 'activities'} onClick={this.handleItemClick}>
+          Activities
         </Menu.Item>
 
         <Menu.Item
@@ -28,7 +32,7 @@ export default class MenuInst extends Component {
           active={activeItem === 'upcomingEvents'}
           onClick={this.handleItemClick}
         >
-          Upcoming Events
+          Events
         </Menu.Item>
       </Menu>
     )
