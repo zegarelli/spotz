@@ -39,7 +39,7 @@ class App extends Component {
       <div className='App'>
         <header className='App-header'>
           <Menu />
-          <PlaceCard />
+          <PlaceCard imgPath='https://data.whicdn.com/images/322549050/large.jpg?t=1542581846'/>
           <button onClick={this.askForPlaces}>Get Places</button>
           <pre>{JSON.stringify(this.state.places, null, 2)}</pre>
           <h2 className='App-intro'>{this.state.apiResponse}</h2>

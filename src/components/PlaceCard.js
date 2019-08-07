@@ -1,9 +1,10 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
-const PlaceCard = () => (
+const PlaceCard = (props) => (
   <Card>
-    <Image src={'../../public/images/bitmoji.jpg'} wrapped ui={false} />
+    <Image src={props.imgPath} wrapped ui={false} />
     <Card.Content>
       <Card.Header>Martin</Card.Header>
       <Card.Meta>
@@ -17,5 +18,9 @@ const PlaceCard = () => (
     </Card.Content>
   </Card>
 )
+
+PlaceCard.propTypes = {
+  imgPath: PropTypes.string.isRequired
+}
 
 export default PlaceCard
