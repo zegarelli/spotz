@@ -1,6 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
-// import 'semantic-ui-css/semantic.min.css'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+import Places from './components/Places'
+import Home from './components/Home'
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Switch>
+      <Route
+        path='/places'
+        component={() => <Places />}
+      />
+      <Route
+        path='/'
+        component={() => <Home />}
+      />
+      <Redirect to='/' />
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById('root')
+)

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { getPlaces } from './services/spots_service'
-import PlaceCard from './components/PlaceCard'
-import Menu from './components/Menu'
+import { getPlaces } from '../services/spots_service'
+import PlaceCard from './PlaceCard'
+import Menu from './Menu'
 
-class App extends Component {
+class Places extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -46,19 +46,17 @@ class App extends Component {
 
   render () {
     return (
-      <div className='App'>
-        <header className='App-header'>
-          <Menu />
-          <button onClick={this.askForPlaces}>Get Places</button>
-          <ul>
-            {this.mapPlaces(this.state.places)}
-          </ul>
-          <pre>{JSON.stringify(this.state.places, null, 2)}</pre>
-          <h2 className='App-intro'>{this.state.apiResponse}</h2>
-        </header>
+      <div className='Places'>
+        <Menu />
+        <button onClick={this.askForPlaces}>Get Places</button>
+        <ul>
+          {this.mapPlaces(this.state.places)}
+        </ul>
+        <pre>{JSON.stringify(this.state.places, null, 2)}</pre>
+        <h2 className='App-intro'>{this.state.apiResponse}</h2>
       </div>
     )
   }
-}// end App Class
+}
 
-export default App
+export default Places
