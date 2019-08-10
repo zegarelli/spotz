@@ -16,11 +16,11 @@ export default class MenuInst extends Component {
           active={activeItem === 'home'}
           onClick={this.handleItemClick}
         >
-          Home
+          <a href="/">Home</a>
         </Menu.Item>
 
         <Menu.Item name='places' active={activeItem === 'places'} onClick={this.handleItemClick}>
-          Places
+          <a href="/places">Places</a>
         </Menu.Item>
 
         <Menu.Item name='activities' active={activeItem === 'activities'} onClick={this.handleItemClick}>
