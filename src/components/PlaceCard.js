@@ -4,14 +4,15 @@ import PropTypes from 'prop-types'
 
 const PlaceCard = (props) => (
   <Card>
-    <Image src={props.imgPath} wrapped ui={false} />
+    {/* <Image src={props.imgPath} wrapped ui={false} /> */}
+    <img src={props.imgPath} title={props.name}/>
     <Card.Content>
-      <Card.Header>Martin</Card.Header>
+      <Card.Header>{props.name}</Card.Header>
       <Card.Meta>
         <span className='date'>Joined in 2019</span>
       </Card.Meta>
       <Card.Description>
-        Martin is a developer living in Kansas City.
+        {props.description}
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
@@ -20,7 +21,9 @@ const PlaceCard = (props) => (
 )
 
 PlaceCard.propTypes = {
-  imgPath: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  imgPath: PropTypes.string
 }
 
 export default PlaceCard
