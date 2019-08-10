@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 
 const PlaceCard = (props) => (
   <Card>
-    {/* <Image src={props.imgPath} wrapped ui={false} /> */}
-    <img src={props.imgPath} title={props.name}/>
+    <Image src={props.imgPath} wrapped ui={false} />
     <Card.Content>
       <Card.Header>{props.name}</Card.Header>
       <Card.Meta>
