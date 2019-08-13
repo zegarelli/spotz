@@ -1,8 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-import * as serviceWorker from './serviceWorker'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'))
-serviceWorker.unregister()
+import Places from './components/Places'
+import Home from './components/Home'
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Switch>
+      <Route
+        path='/places'
+        component={() => <Places />}
+      />
+      <Route
+        path='/'
+        component={() => <Home />}
+      />
+      <Redirect to='/' />
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById('root')
+)
