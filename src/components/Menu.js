@@ -13,28 +13,17 @@ export default class MenuInst extends Component {
     return (
       <Menu>
         <Link to='/' >
-          <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          />
+          <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
         </Link>
-
         <Link to='/places' >
           <Menu.Item name='places' active={activeItem === 'places'} onClick={this.handleItemClick} />
         </Link>
-
-        <Menu.Item name='activities' active={activeItem === 'activities'} onClick={this.handleItemClick}>
-          Activities
-        </Menu.Item>
-
-        <Menu.Item
-          name='upcomingEvents'
-          active={activeItem === 'upcomingEvents'}
-          onClick={this.handleItemClick}
-        >
-          Events
-        </Menu.Item>
+        <Link to='/activities' >
+          <Menu.Item name='activities' active={activeItem === 'activities'} onClick={this.handleItemClick}/>
+        </Link>
+        <Link to='/events'>
+          <Menu.Item name='events' active={activeItem === 'events'} onClick={this.handleItemClick} />
+        </Link>
       </Menu>
     )
   }
