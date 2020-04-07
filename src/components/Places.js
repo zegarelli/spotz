@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { getPlaces } from '../services/spots_service'
 import PlaceCard from './PlaceCard'
-import Menu from './Menu'
 
 class Places extends Component {
   constructor (props) {
@@ -10,7 +9,7 @@ class Places extends Component {
       apiResponse: '',
       places: []
     }
-    this.askForPlaces = this.askForPlaces.bind(this)
+    this.handleGetPlaces = this.handleGetPlaces.bind(this)
   }
 
   callAPI () {
@@ -24,7 +23,7 @@ class Places extends Component {
     this.callAPI()
   }
 
-  async askForPlaces () {
+  async handleGetPlaces () {
     try {
       const places = await getPlaces()
       this.setState({ places: places })
@@ -47,8 +46,7 @@ class Places extends Component {
   render () {
     return (
       <div className='Places'>
-        <Menu />
-        <button onClick={this.askForPlaces}>Get Places</button>
+        <button onClick={this.handleGetPlaces}>Get Places</button>
         <ul>
           {this.mapPlaces(this.state.places)}
         </ul>
