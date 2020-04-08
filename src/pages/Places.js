@@ -1,60 +1,26 @@
-import React, { Component } from 'react'
-import { getPlaces } from '../services/spots_service'
-import PlaceCard from '../components/PlaceCard'
+import React from 'react'
+import { Loader, Item } from 'semantic-ui-react'
+import useDataFetch from '../hooks/fetchData'
+import Place from '../components/Place'
 
-class Places extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      apiResponse: '',
-      places: []
-    }
-    this.handleGetPlaces = this.handleGetPlaces.bind(this)
-  }
+function Places2 () {
+  const [{ apiResult: places, isLoading, isError }] = useDataFetch('http://localhost:9000/places/')
 
-  callAPI () {
-    window.fetch('http://localhost:9000/test/')
-      .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }))
-      .catch(err => err)
-  }
-
-  componentDidMount () {
-    this.callAPI()
-  }
-
-  async handleGetPlaces () {
-    try {
-      const places = await getPlaces()
-      this.setState({ places: places })
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  mapPlaces (places) {
-    return places.slice().map((place) => {
-      console.log(place.extended_data.description)
-      return (
-        <li key={place.id}>
-          <PlaceCard name={place.name} imgPath={place.extended_data.imagePath} description={place.extended_data.description} />
-        </li>
-      )
-    })
-  }
-
-  render () {
-    return (
-      <div className='Places'>
-        <button onClick={this.handleGetPlaces}>Get Places</button>
-        <ul>
-          {this.mapPlaces(this.state.places)}
-        </ul>
-        <pre>{JSON.stringify(this.state.places, null, 2)}</pre>
-        <h2 className='App-intro'>{this.state.apiResponse}</h2>
-      </div>
-    )
-  }
+  return (
+    <div className='Places'>
+      <Item.Group>
+        {isError && <b>Error</b>}
+        {!isError && isLoading && <Loader active />}
+        {!isError && !isLoading && places &&
+        places.slice().map((place) => {
+          return (
+            <Place key={place.id} name={place.name} extended_data={place.extended_data} created_at={place.created_at} />
+          )
+        }
+        )}
+      </Item.Group>
+    </div>
+  )
 }
 
-export default Places
+export default Places2

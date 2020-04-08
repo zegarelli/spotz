@@ -14,7 +14,7 @@ function Activities () {
         {!isError && !isLoading && activities &&
         activities.slice().map((activity) => {
           return (
-            <Activity key={activity.id} activity />
+            <Activity key={activity.id} name={activity.name} created_at={activity.created_at} place_id={activity.place_id} />
           )
         }
         )}
