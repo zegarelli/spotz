@@ -20,7 +20,7 @@ function Activity (props) {
 
 Activity.propTypes = {
   name: PropTypes.string.isRequired,
-  place_id: PropTypes.string.isRequired,
+  place_id: PropTypes.number.isRequired,
   created_at: PropTypes.string
 }
 

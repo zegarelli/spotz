@@ -20,8 +20,8 @@ function Place (props) {
 
 Place.propTypes = {
   name: PropTypes.string.isRequired,
-  place_id: PropTypes.string.isRequired,
-  created_at: PropTypes.string
+  created_at: PropTypes.string,
+  extended_data: PropTypes.object.isRequired
 }
 
 export default Place
