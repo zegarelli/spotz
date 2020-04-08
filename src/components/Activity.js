@@ -1,34 +1,21 @@
 import React from 'react'
-import { Image, Item } from 'semantic-ui-react'
+import { Item, Image } from 'semantic-ui-react'
 
-const Activity = () => (
-  <Item.Group>
+function Activity (activity) {
+  return (
     <Item>
-      <Item.Image size='tiny' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-
+      <Item.Image size='tiny' src='/images/bitmoji.png' />
       <Item.Content>
-        <Item.Header as='a'>Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
+        <Item.Header>{activity.name}</Item.Header>
         <Item.Description>
           <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
         </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
+        <Item.Description>{`${activity.name} at place ${activity.place_id}`}</Item.Description>
+        <Item.Extra>{`Created At: ${activity.created_at}`}</Item.Extra>
       </Item.Content>
     </Item>
 
-    <Item>
-      <Item.Image size='tiny' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-
-      <Item.Content>
-        <Item.Header as='a'>Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-  </Item.Group>
-)
+  )
+}
 
 export default Activity
