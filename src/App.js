@@ -8,7 +8,7 @@ import Activities from './pages/Activities'
 
 function App () {
   return (
-    <div className='App'>
+    <div className='App' data-testid='app'>
       <BrowserRouter>
         <Menu />
         <Switch>
@@ -30,7 +30,7 @@ function App () {
           />
           <Redirect to='/' />
         </Switch>
-      </BrowserRouter>,
+      </BrowserRouter>
     </div>
   )
 }
