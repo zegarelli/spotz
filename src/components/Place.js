@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 
 function Place (props) {
   return (
-    <Item>
+    <Item
+      data-testid='place'
+    >
       <Item.Image size='small' src={props.extended_data.imagePath} />
       <Item.Content>
         <Item.Header>{props.name}</Item.Header>
