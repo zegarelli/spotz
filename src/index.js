@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import Places from './components/Places'
-import Home from './components/Home'
+import Places from './pages/Places'
+import Home from './pages/Home'
 import Menu from './components/Menu'
-import Activities from './components/Activities'
+import Activities from './pages/Activities'
 
 ReactDOM.render(
   <BrowserRouter>

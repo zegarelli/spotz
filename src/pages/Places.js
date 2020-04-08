@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getPlaces } from '../services/spots_service'
-import PlaceCard from './PlaceCard'
+import PlaceCard from '../components/PlaceCard'
 
 class Places extends Component {
   constructor (props) {

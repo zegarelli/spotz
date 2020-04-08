@@ -1,7 +1,7 @@
 import React from 'react'
 import { Loader, Item } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
-import Activity from './Activity'
+import Activity from '../components/Activity'
 
 function Activities () {
   const [{ apiResult: activities, isLoading, isError }] = useDataFetch('http://localhost:9000/activities')
