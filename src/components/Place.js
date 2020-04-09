@@ -3,17 +3,25 @@ import { Item } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 function Place (props) {
+  let imagePath = ''
+  let opens = '8:00 AM'
+  let closes = '5:00 PM'
+  let description = 'No description provided'
+  if (props.extended_data) {
+    imagePath = props.extended_data.imagePath || imagePath
+    opens = props.extended_data.opens || opens
+    closes = props.extended_data.closes || closes
+    description = props.extended_data.description || description
+  }
   return (
     <Item
       data-testid='place'
     >
-      <Item.Image size='small' src={props.extended_data.imagePath} />
+      <Item.Image size='small' src={imagePath} />
       <Item.Content>
         <Item.Header>{props.name}</Item.Header>
-        <Item.Description>
-          {props.extended_data.description}
-        </Item.Description>
-        <Item.Meta>{`Opens: ${props.extended_data.opens} Closes: ${props.extended_data.closes}`}</Item.Meta>
+        <Item.Description>{description}</Item.Description>
+        <Item.Meta>{`Opens: ${opens} Closes: ${closes}`}</Item.Meta>
         <Item.Extra>{`Created At: ${props.created_at}`}</Item.Extra>
       </Item.Content>
     </Item>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 function Activity (props) {
   return (
-    <Item>
+    <Item data-testid='activity'>
       <Item.Image size='tiny' src='/images/bitmoji.png' />
       <Item.Content>
         <Item.Header>{props.name}</Item.Header>

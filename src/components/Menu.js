@@ -11,7 +11,7 @@ export default class MenuInst extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu>
+      <Menu data-testid='menu'>
           <Menu.Item as={ Link } to='/' name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
           <Menu.Item as={ Link } to='/places' name='places' active={activeItem === 'places'} onClick={this.handleItemClick} />
           <Menu.Item as={ Link } to='/activities' name='activities' active={activeItem === 'activities'} onClick={this.handleItemClick}/>
