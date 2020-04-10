@@ -1,6 +1,7 @@
 import React from 'react'
 import { Item } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 function Place (props) {
   let imagePath = ''
@@ -24,7 +25,7 @@ function Place (props) {
     >
       <Item.Image size='small' src={imagePath} />
       <Item.Content>
-        <Item.Header>{props.name}</Item.Header>
+        <Item.Header as={Link} to={`places/${props.id}`}>{props.name}</Item.Header>
         <Item.Description>{description}<br />{`Activities: ${activities.join(', ')}`}</Item.Description>
         <Item.Meta>{`Opens: ${opens} Closes: ${closes}`}</Item.Meta>
         <Item.Extra>{`Created At: ${props.created_at}`}</Item.Extra>
@@ -34,6 +35,7 @@ function Place (props) {
 }
 
 Place.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   created_at: PropTypes.string,
   extended_data: PropTypes.object.isRequired,

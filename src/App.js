@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Places from './pages/Places'
+import Place from './pages/Place'
 import Home from './pages/Home'
 import Menu from './components/Menu'
 import Activities from './pages/Activities'
@@ -12,6 +13,10 @@ function App () {
       <BrowserRouter>
         <Menu />
         <Switch>
+          <Route
+            path='/places/:id'
+            component={() => <Place />}
+          />
           <Route
             path='/places'
             component={() => <Places />}

@@ -3,7 +3,7 @@ import { Loader, Item } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
 import Place from '../components/Place'
 
-function Places2 () {
+function Places () {
   const [{ apiResult: places, isLoading, isError }] = useDataFetch('http://localhost:9000/places/')
 
   return (
@@ -14,7 +14,7 @@ function Places2 () {
         {!isError && !isLoading && places &&
         places.slice().map((place) => {
           return (
-            <Place key={place.id} name={place.name} extended_data={place.extended_data} created_at={place.created_at} placeActivities={place.placeActivities} />
+            <Place key={place.id} id={place.id} name={place.name} extended_data={place.extended_data} created_at={place.created_at} placeActivities={place.placeActivities} />
           )
         }
         )}
@@ -23,4 +23,4 @@ function Places2 () {
   )
 }
 
-export default Places2
+export default Places
