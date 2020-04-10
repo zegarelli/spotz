@@ -14,7 +14,7 @@ function Places2 () {
         {!isError && !isLoading && places &&
         places.slice().map((place) => {
           return (
-            <Place key={place.id} name={place.name} extended_data={place.extended_data} created_at={place.created_at} />
+            <Place key={place.id} name={place.name} extended_data={place.extended_data} created_at={place.created_at} activities={place.activities} />
           )
         }
         )}

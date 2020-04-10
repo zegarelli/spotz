@@ -13,6 +13,11 @@ function Place (props) {
     closes = props.extended_data.closes || closes
     description = props.extended_data.description || description
   }
+
+  const activities = []
+  props.activities.forEach(activity => {
+    activities.push(activity.name)
+  })
   return (
     <Item
       data-testid='place'
@@ -20,7 +25,7 @@ function Place (props) {
       <Item.Image size='small' src={imagePath} />
       <Item.Content>
         <Item.Header>{props.name}</Item.Header>
-        <Item.Description>{description}</Item.Description>
+        <Item.Description>{description}<br />{`Activities: ${activities.join(', ')}`}</Item.Description>
         <Item.Meta>{`Opens: ${opens} Closes: ${closes}`}</Item.Meta>
         <Item.Extra>{`Created At: ${props.created_at}`}</Item.Extra>
       </Item.Content>
@@ -31,7 +36,8 @@ function Place (props) {
 Place.propTypes = {
   name: PropTypes.string.isRequired,
   created_at: PropTypes.string,
-  extended_data: PropTypes.object.isRequired
+  extended_data: PropTypes.object.isRequired,
+  activities: PropTypes.array.isRequired
 }
 
 export default Place
