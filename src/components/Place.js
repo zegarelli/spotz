@@ -15,8 +15,8 @@ function Place (props) {
   }
 
   const activities = []
-  props.activities.forEach(activity => {
-    activities.push(activity.name)
+  props.placeActivities.forEach(placeActivity => {
+    activities.push(placeActivity.activity.name)
   })
   return (
     <Item
