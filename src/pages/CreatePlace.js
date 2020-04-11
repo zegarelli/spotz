@@ -76,7 +76,7 @@ function NewPlace (props) {
             loading={activitiesLoading}
             error={activitiesError}
             onChange={(e, data) => {
-              setSelectedActivities([data.value])
+              setSelectedActivities(data.value)
             }}
           >
           </Form.Dropdown>

@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Menu from './components/Menu'
 import Activities from './pages/Activities'
 import ActivityDetail from './pages/ActivityDetail'
+import CreateActivity from './pages/CreateActivity'
 
 function App () {
   return (
@@ -26,6 +27,10 @@ function App () {
           <Route
             path='/places'
             component={() => <Places />}
+          />
+          <Route
+            path='/activities/new'
+            component={() => <CreateActivity />}
           />
           <Route
             path='/activities/:id'

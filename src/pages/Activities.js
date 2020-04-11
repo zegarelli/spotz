@@ -1,5 +1,6 @@
 import React from 'react'
-import { Loader } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Loader, Container, Button } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
 import ActivityContainer from '../components/ActivityContainer'
 
@@ -8,6 +9,9 @@ function Activities () {
 
   return (
     <div className='Activities'>
+      <Container textAlign='right'>
+        <Button primary as={Link} to='/activities/new'>New</Button>
+      </Container>
       {isError && <b>Error</b>}
       {!isError && isLoading && <Loader active />}
       {!isError && !isLoading && activities &&
