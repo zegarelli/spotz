@@ -3,7 +3,7 @@ import { Item } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-function Place (props) {
+function PlaceCard (props) {
   let imagePath = ''
   let opens = '8:00 AM'
   let closes = '5:00 PM'
@@ -34,12 +34,12 @@ function Place (props) {
   )
 }
 
-Place.propTypes = {
+PlaceCard.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   created_at: PropTypes.string,
   extended_data: PropTypes.object.isRequired,
-  activities: PropTypes.array.isRequired
+  activities: PropTypes.array
 }
 
-export default Place
+export default PlaceCard

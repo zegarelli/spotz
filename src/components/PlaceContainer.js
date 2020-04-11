@@ -3,7 +3,7 @@ import PlaceCard from './PlaceCard'
 import PropTypes from 'prop-types'
 import { Item, Container } from 'semantic-ui-react'
 
-function ActivityContainer (props) {
+function PlaceContainer (props) {
   return (
     <Container>
       <Item.Group>
@@ -23,8 +23,8 @@ function ActivityContainer (props) {
   )
 }
 
-ActivityContainer.propTypes = {
-  activities: PropTypes.array.isRequired
+PlaceContainer.propTypes = {
+  places: PropTypes.array.isRequired
 }
 
-export default ActivityContainer
+export default PlaceContainer
