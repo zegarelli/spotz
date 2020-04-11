@@ -6,6 +6,7 @@ import PlaceDetail from './pages/PlaceDetail'
 import Home from './pages/Home'
 import Menu from './components/Menu'
 import Activities from './pages/Activities'
+import ActivityDetail from './pages/ActivityDetail'
 
 function App () {
   return (
@@ -20,6 +21,10 @@ function App () {
           <Route
             path='/places'
             component={() => <Places />}
+          />
+          <Route
+            path='/activities/:id'
+            component={() => <ActivityDetail />}
           />
           <Route
             path='/activities'

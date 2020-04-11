@@ -1,6 +1,7 @@
 import React from 'react'
 import { Item, Image } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 function mapPlaces (placeActivities) {
   const places = []
@@ -17,7 +18,7 @@ function ActivityCard (props) {
     <Item data-testid='activity'>
       <Item.Image size='tiny' src='/images/bitmoji.png' />
       <Item.Content>
-        <Item.Header>{props.name}</Item.Header>
+        <Item.Header as={Link} to={`/activities/${props.id}`}>{props.name}</Item.Header>
         <Item.Description>
           <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
         </Item.Description>
@@ -29,6 +30,7 @@ function ActivityCard (props) {
 }
 
 ActivityCard.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   created_at: PropTypes.string
 }

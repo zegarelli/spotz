@@ -11,6 +11,7 @@ function ActivityContainer (props) {
           return (
             <ActivityCard
               key={activity.id}
+              id={activity.id}
               name={activity.name}
               placeActivities={activity.placeActivities}
             />
