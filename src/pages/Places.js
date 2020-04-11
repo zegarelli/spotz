@@ -1,7 +1,7 @@
 import React from 'react'
 import { Loader, Item } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
-import Place from '../components/PlaceCard'
+import PlaceContainer from '../components/PlaceContainer'
 
 function Places () {
   const [{ apiResult: places, isLoading, isError }] = useDataFetch('http://localhost:9000/places/')
@@ -12,12 +12,7 @@ function Places () {
         {isError && <b>Error</b>}
         {!isError && isLoading && <Loader active />}
         {!isError && !isLoading && places &&
-        places.slice().map((place) => {
-          return (
-            <Place key={place.id} id={place.id} name={place.name} extended_data={place.extended_data} created_at={place.created_at} placeActivities={place.placeActivities} />
-          )
-        }
-        )}
+          <PlaceContainer places={places} />}
       </Item.Group>
     </div>
   )
