@@ -2,8 +2,20 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Loader, Header, Grid, Image } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
+import ActivityContainer from '../components/ActivityContainer'
 
-function PlaceDetail () {
+function formatActivities (placeActivities) {
+  const activities = []
+  placeActivities.forEach(placeActivity => {
+    activities.push({
+      name: placeActivity.activity.name,
+      id: placeActivity.activity_id
+    })
+  })
+  return activities
+}
+
+function PlaceDetail (props) {
   const { id } = useParams()
   const [{ apiResult: place, isLoading, isError }] = useDataFetch(`http://localhost:9000/places/${id}`)
 
@@ -29,7 +41,9 @@ function PlaceDetail () {
             </Grid.Column>
             <Grid.Column width={10}>
               <Header as='h2'>Activities</Header>
-              {}
+              {
+                <ActivityContainer activities={formatActivities(place.placeActivities)} />
+              }
             </Grid.Column>
             <Grid.Column width={3}>
               <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
