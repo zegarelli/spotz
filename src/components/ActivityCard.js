@@ -2,11 +2,16 @@ import React from 'react'
 import { Item, Image } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
-function Activity (props) {
+function mapPlaces (placeActivities) {
   const places = []
-  props.placeActivities.forEach(placeActivity => {
+  placeActivities.forEach(placeActivity => {
     places.push(placeActivity.place.name)
   })
+  return places
+}
+
+function ActivityCard (props) {
+  const places = props.placeActivities ? mapPlaces(props.placeActivities) : undefined
 
   return (
     <Item data-testid='activity'>
@@ -16,17 +21,16 @@ function Activity (props) {
         <Item.Description>
           <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
         </Item.Description>
-        <Item.Description>{`${props.name} at place ${props.place_id}`}</Item.Description>
-        <Item.Extra>{`Places: ${places.join(', ')}`}</Item.Extra>
+        {places &&
+          <Item.Extra>{`Places: ${places.join(', ')}`}</Item.Extra>}
       </Item.Content>
     </Item>
   )
 }
 
-Activity.propTypes = {
+ActivityCard.propTypes = {
   name: PropTypes.string.isRequired,
-  place_id: PropTypes.number.isRequired,
   created_at: PropTypes.string
 }
 
-export default Activity
+export default ActivityCard

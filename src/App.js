@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Places from './pages/Places'
-import Place from './pages/Place'
+import PlaceDetail from './pages/PlaceDetail'
 import Home from './pages/Home'
 import Menu from './components/Menu'
 import Activities from './pages/Activities'
@@ -15,7 +15,7 @@ function App () {
         <Switch>
           <Route
             path='/places/:id'
-            component={() => <Place />}
+            component={() => <PlaceDetail />}
           />
           <Route
             path='/places'
