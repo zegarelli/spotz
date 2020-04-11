@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export const useDataPut = (initialUrl, initialPayload) => {
+const useDataPut = (initialUrl, initialPayload) => {
   const [url] = useState(initialUrl)
   const [payload, setPayload] = useState(initialPayload)
   const [apiResult, setApiResult] = useState(undefined)
@@ -38,3 +38,5 @@ export const useDataPut = (initialUrl, initialPayload) => {
 
   return [{ apiResult, isLoading, isError }, setPayload]
 }
+
+export default useDataPut
