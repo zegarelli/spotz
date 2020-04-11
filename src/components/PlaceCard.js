@@ -3,6 +3,14 @@ import { Item } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+function mapActivities (placeActivities) {
+  const activities = []
+  placeActivities.forEach(placeActivity => {
+    activities.push(placeActivity.activity.name)
+  })
+  return activities
+}
+
 function PlaceCard (props) {
   let imagePath = ''
   let opens = '8:00 AM'
@@ -15,20 +23,18 @@ function PlaceCard (props) {
     description = props.extended_data.description || description
   }
 
-  const activities = []
-  props.placeActivities.forEach(placeActivity => {
-    activities.push(placeActivity.activity.name)
-  })
+  const activities = props.placeActivities ? mapActivities(props.placeActivities) : undefined
+
   return (
     <Item
       data-testid='place'
     >
       <Item.Image size='small' src={imagePath} />
       <Item.Content>
-        <Item.Header as={Link} to={`places/${props.id}`}>{props.name}</Item.Header>
-        <Item.Description>{description}<br />{`Activities: ${activities.join(', ')}`}</Item.Description>
+        <Item.Header as={Link} to={`/places/${props.id}`}>{props.name}</Item.Header>
+        <Item.Description>{description}</Item.Description>
         <Item.Meta>{`Opens: ${opens} Closes: ${closes}`}</Item.Meta>
-        <Item.Extra>{`Created At: ${props.created_at}`}</Item.Extra>
+        {activities && <Item.Extra>{`Activities: ${activities.join(', ')}`}</Item.Extra>}
       </Item.Content>
     </Item>
   )
