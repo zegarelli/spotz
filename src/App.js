@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Places from './pages/Places'
 import PlaceDetail from './pages/PlaceDetail'
+import CreatePlace from './pages/CreatePlace'
 import Home from './pages/Home'
 import Menu from './components/Menu'
 import Activities from './pages/Activities'
@@ -14,6 +15,10 @@ function App () {
       <BrowserRouter>
         <Menu />
         <Switch>
+          <Route
+            path='/places/new'
+            component={() => <CreatePlace />}
+          />
           <Route
             path='/places/:id'
             component={() => <PlaceDetail />}
