@@ -1,7 +1,7 @@
 import React from 'react'
 import { Loader, Item } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
-import Place from '../components/Place'
+import Place from '../components/PlaceCard'
 
 function Places () {
   const [{ apiResult: places, isLoading, isError }] = useDataFetch('http://localhost:9000/places/')
