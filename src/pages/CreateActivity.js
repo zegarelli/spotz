@@ -38,7 +38,7 @@ function CreateActivity (props) {
 
   if (submitResult) {
     console.log(submitResult)
-    return <Redirect to='/activities' />
+    return <Redirect to={`/activities/${submitResult.id}`} />
   }
 
   const handleSubmit = function async (e) {

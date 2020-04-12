@@ -37,8 +37,7 @@ function NewPlace (props) {
   ] = useDataPost('http://localhost:9000/places')
 
   if (submitResult) {
-    console.log(submitResult)
-    return <Redirect to='/places' />
+    return <Redirect to={`/places/${submitResult.id}`} />
   }
 
   const handleSubmit = function async (e) {
