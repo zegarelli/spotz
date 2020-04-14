@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Places from './pages/Places'
 import PlaceDetail from './pages/PlaceDetail'
 import CreatePlace from './pages/CreatePlace'
+import EditPlace from './pages/EditPlace'
 import Home from './pages/Home'
 import Menu from './components/Menu'
 import Activities from './pages/Activities'
@@ -19,6 +20,10 @@ function App () {
           <Route
             path='/places/new'
             component={() => <CreatePlace />}
+          />
+          <Route
+            path='/places/:id/edit'
+            component={() => <EditPlace />}
           />
           <Route
             path='/places/:id'
