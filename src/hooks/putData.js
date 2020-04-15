@@ -10,10 +10,11 @@ const useDataPut = (initialUrl, initialPayload) => {
   useEffect(() => {
     const fetchData = async () => {
       setIsError(false)
-      setIsLoading(payload)
+      setIsLoading(!!payload)
 
       if (payload) {
         try {
+          setIsLoading(true)
           const res = await window.fetch(url, {
             method: 'PUT',
             headers: { 'content-type': 'application/json' },
@@ -24,11 +25,18 @@ const useDataPut = (initialUrl, initialPayload) => {
           if (!res.ok) {
             setIsError(true)
           }
-          const apiResult = url !== '' && (await res.json())
+          let apiResult = url !== ''
+          if (apiResult) {
+            const contentType = res.headers.get('content-type')
+            const isJson =
+              contentType && contentType.indexOf('application/json') !== -1
+            apiResult = isJson ? await res.json() : { result: await res.text() }
+          }
           setApiResult(apiResult)
-          setIsLoading(false)
         } catch (error) {
           setIsError(true)
+        } finally {
+          setIsLoading(false)
         }
       }
     }
