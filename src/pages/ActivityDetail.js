@@ -1,6 +1,6 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import { Loader, Header, Grid, Image } from 'semantic-ui-react'
+import { useParams, Link } from 'react-router-dom'
+import { Loader, Header, Grid, Image, Button } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
 import PlaceContainer from '../components/PlaceContainer'
 
@@ -30,9 +30,12 @@ function ActivityDetail (props) {
             <Grid.Column width={3}>
               <Image src='/images/bitmoji.png' />
             </Grid.Column>
-            <Grid.Column width={13}>
+            <Grid.Column width={11}>
               <Header as='h1'>{activity.name}</Header>
               <Image src='https://react.semantic-ui.com/images/wireframe/centered-paragraph.png' />
+            </Grid.Column>
+            <Grid.Column width={1}>
+              <Button primary as={Link} to={`/activities/${id}/edit`}>Edit</Button>
             </Grid.Column>
           </Grid.Row>
 

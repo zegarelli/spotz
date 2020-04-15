@@ -1,15 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import Places from './pages/Places'
-import PlaceDetail from './pages/PlaceDetail'
-import CreatePlace from './pages/CreatePlace'
-import EditPlace from './pages/EditPlace'
-import Home from './pages/Home'
 import Menu from './components/Menu'
+
+import Home from './pages/Home'
+
+import Places from './pages/Places'
+import CreatePlace from './pages/CreatePlace'
+import PlaceDetail from './pages/PlaceDetail'
+import EditPlace from './pages/EditPlace'
+
 import Activities from './pages/Activities'
 import ActivityDetail from './pages/ActivityDetail'
 import CreateActivity from './pages/CreateActivity'
+import EditActivity from './pages/EditActivity'
 
 function App () {
   return (
@@ -36,6 +40,10 @@ function App () {
           <Route
             path='/activities/new'
             component={() => <CreateActivity />}
+          />
+          <Route
+            path='/activities/:id/edit'
+            component={() => <EditActivity />}
           />
           <Route
             path='/activities/:id'
