@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Header, Container, Button, Form, Message, Dimmer, Loader } from 'semantic-ui-react'
 import { Redirect, useParams } from 'react-router-dom'
 import useDataFetch from '../hooks/fetchData'
-import useDataPost from '../hooks/postData'
+import useDataPut from '../hooks/putData'
 
 function mapActivitiesDropDown (activities) {
   const options = []
@@ -14,6 +14,14 @@ function mapActivitiesDropDown (activities) {
     })
   })
   return options
+}
+
+function extractActivityIds (placeActivities) {
+  const activities = []
+  placeActivities.forEach(placeActivity => {
+    activities.push(placeActivity.activity_id)
+  })
+  return activities
 }
 
 function EditPlace (props) {
@@ -28,12 +36,11 @@ function EditPlace (props) {
     isError: placeError
   }] = useDataFetch(`http://localhost:9000/places/${id}`)
 
-  useEffect((place) => {
-    console.log('In Use Effect', place)
+  useEffect(() => {
     if (place) {
-      console.log(place)
       setName(place.name)
-      setDescription(place.description)
+      setDescription(place.extended_data.description)
+      setSelectedActivities(extractActivityIds(place.placeActivities))
     }
   }, [place])
 
@@ -50,7 +57,7 @@ function EditPlace (props) {
       isError: submitError
     },
     setPayload
-  ] = useDataPost('http://localhost:9000/places')
+  ] = useDataPut(`http://localhost:9000/places/${id}`)
 
   if (submitResult) {
     return <Redirect to={`/places/${submitResult.id}`} />
@@ -82,8 +89,8 @@ function EditPlace (props) {
                 header='Error on Submission'
                 content='Something went wrong when submitting edits. Please Retry'
               />
-              <Form.Input fluid label='Place Name' placeholder='Place Name' onChange={e => setName(e.target.value)} />
-              <Form.TextArea label='Description' placeholder='Tell us more about your new place...' onChange={e => setDescription(e.target.value)} />
+              <Form.Input fluid label='Place Name' placeholder='Place Name' onChange={e => setName(e.target.value)} value={name} />
+              <Form.TextArea label='Description' placeholder='Tell us more about your new place...' onChange={e => setDescription(e.target.value)} value={description} />
               <Form.Dropdown
                 label='Activities'
                 placeholder='Activities'
@@ -97,12 +104,10 @@ function EditPlace (props) {
                 onChange={(e, data) => {
                   setSelectedActivities(data.value)
                 }}
+                value={selectedActivities}
               >
               </Form.Dropdown>
             </Form>
-            <strong>onChange:</strong>
-            <pre>{JSON.stringify({ name, description, selectedActivities }, null, 2)}</pre>
-            <pre>{JSON.stringify({ place }, null, 2)}</pre>
           </>}
       </Container>
     </div>
