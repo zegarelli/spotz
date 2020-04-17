@@ -3,42 +3,35 @@ const jwt = require('jsonwebtoken')
 const jwkToPem = require('jwk-to-pem')
 const jwk = require('./jwks.json')
 
-async function getToken () {
-  const token = Cookie.get('token') ? Cookie.get('token') : null
+function getToken (name) {
+  const token = Cookie.get(name) ? Cookie.get(name) : null
   return token
 }
 
-async function getDecodedToken () {
-  const token = await getToken()
-  if (token) {
+async function getDecodedToken (name) {
+  const token = await getToken(name)
+  if (token && token !== 'undefined') {
     const pem = jwkToPem(jwk.keys[0])
     const decodedToken = await jwt.verify(token, pem, { algorithms: ['RS256'] })
     return decodedToken
   }
 }
 
-function setToken (token) {
-  Cookie.set('token', token, { expires: 1 / 24 })
-}
-
-async function getTokenFromUrl () {
-  const raw = window.location.hash
-  let idToken
-  for (const param of raw.replace('#', '').split('&')) {
-    const [key, value] = param.split('=')
-    if (key === 'id_token') {
-      idToken = value
-      break
+function getTokenFromUrl () {
+  const token = getToken('id_token')
+  if (!token) {
+    const raw = window.location.hash
+    if (raw) {
+      for (const param of raw.replace('#', '').split('&')) {
+        const [key, value] = param.split('=')
+        Cookie.set(key, value, { expires: 1 / 24 })
+      }
     }
   }
-  setToken(idToken)
-  const token = await getDecodedToken()
-  return token
 }
 
 export {
   getToken,
-  setToken,
   getTokenFromUrl,
   getDecodedToken
 }
