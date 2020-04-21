@@ -1,35 +1,62 @@
 import { useState, useEffect } from 'react'
-import { getTokenFromUrl, getDecodedToken } from '../common/token'
+import { getTokensFromUrl } from '../common/token'
+import Cookie from 'js-cookie'
 
 const useSession = () => {
-  const [tokenName, setTokenName] = useState(undefined)
-  const [token, setToken] = useState(undefined)
-  const [tokenLoading, setTokenLoading] = useState(true)
-  const [tokenError, setTokenError] = useState(false)
+  const [session, setSession] = useState(undefined)
+  const [sessionLoading, setSessionLoading] = useState(true)
+  const [sessionError, setSessionError] = useState(false)
 
   useEffect(() => {
-    async function getToken () {
-      if (tokenName) {
+    async function getSession () {
+      // check if we are already verified
+      const sessionString = Cookie.get('session')
+      let session
+      if (sessionString) {
+        session = JSON.parse(sessionString)
+      }
+      const tokens = getTokensFromUrl()
+      if (!session && tokens) {
+        setSessionLoading(true)
         try {
-          getTokenFromUrl()
-          setToken(await getDecodedToken(tokenName))
-        } catch (err) {
-          if (err.message === 'jwt expired') {
-            setToken(undefined)
-            setTokenLoading(false)
+          const res = await window.fetch('http://localhost:9000/users/verify', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              ...tokens
+            })
+          })
+          if (!res.ok) {
+            setSessionError(true)
           } else {
-            console.log(err)
-            setTokenLoading(false)
-            setTokenError(true)
+            const contentType = res.headers.get('content-type')
+            const isJson =
+                  contentType && contentType.indexOf('application/json') !== -1
+            const apiResult = isJson ? await res.json() : { result: await res.text() }
+            const session = {
+              username: apiResult.username,
+              email: apiResult.email,
+              verified: apiResult.verified
+            }
+            Cookie.set('session', session)
+            const sessionCookie = JSON.parse(Cookie.get('session'))
+            setSession(sessionCookie)
           }
+        } catch (err) {
+          console.log('error')
+          console.log(err)
+          setSessionError(true)
+        } finally {
+          setSessionLoading(false)
         }
+      } else {
+        setSession(session)
       }
     }
+    getSession()
+  }, [])
 
-    getToken()
-  }, [tokenName])
-
-  return [{ token, tokenLoading, tokenError }, setTokenName]
+  return [{ session, sessionLoading, sessionError }]
 }
 
 export default useSession

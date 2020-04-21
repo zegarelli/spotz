@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 // pages
@@ -16,20 +16,16 @@ import ActivityDetail from './pages/ActivityDetail'
 import CreateActivity from './pages/CreateActivity'
 import EditActivity from './pages/EditActivity'
 
-// hooks
+// Hooks
 import useSession from './hooks/useSession'
 
 function App () {
-  const [{ token }, setTokenName] = useSession()
-
-  useEffect(() => {
-    setTokenName('id_token')
-  }, [setTokenName])
+  const [{ session }] = useSession()
 
   return (
     <div className='App' data-testid='app'>
       <BrowserRouter>
-        <Menu token={token} />
+        <Menu session={session} />
         <Switch>
           <Route
             path='/places/new'
@@ -57,7 +53,7 @@ function App () {
           />
           <Route
             path='/activities/:id'
-            component={() => <ActivityDetail />}
+            component={() => <ActivityDetail session={session} />}
           />
           <Route
             path='/activities'
