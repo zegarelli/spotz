@@ -19,6 +19,7 @@ function formatPlaces (placeActivities) {
 function ActivityDetail (props) {
   const { id } = useParams()
   const [{ apiResult: activity, isLoading, isError }] = useDataFetch(`http://localhost:9000/activities/${id}`)
+  const verified = props.session && props.session.verified
 
   return (
     <div className='ActivityDetail'>
@@ -35,7 +36,7 @@ function ActivityDetail (props) {
               <Image src='https://react.semantic-ui.com/images/wireframe/centered-paragraph.png' />
             </Grid.Column>
             <Grid.Column width={1}>
-              <Button primary as={Link} to={`/activities/${id}/edit`}>Edit</Button>
+              <Button primary as={Link} to={`/activities/${id}/edit`} disabled={!verified}>Edit</Button>
             </Grid.Column>
           </Grid.Row>
 
