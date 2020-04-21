@@ -8,13 +8,12 @@ export default class MenuInst extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   handleLogout = (e) => {
-    Cookie.remove('id_token')
+    Cookie.remove('session')
     window.location.href = window.location.origin.toString()
   }
 
   render() {
     const { activeItem } = this.state
-
     return (
       <Menu data-testid='menu'>
           <Menu.Item as={ Link } to='/' name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
@@ -25,16 +24,16 @@ export default class MenuInst extends Component {
           <Menu.Item>
             <Input icon='search' placeholder='Search...' />
           </Menu.Item>
-          { 
-          !this.props.token ? 
+          {
+          !(this.props.session && this.props.session.username) ? 
           <Menu.Item
             as= 'a'
             href={`https://spotz.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=32hvc3lpimluo1ro0bc8p0pjm8&redirect_uri=${window.location.origin.toString()}`}
             name='login'
-          /> : 
+          /> 
+          : 
           <>
-          {console.log(this.props.token)}
-            <Menu.Item as={ Link } to='/profile' name={this.props.token['cognito:username']}/>
+            <Menu.Item as={ Link } to='/profile' name={this.props.session.username}/>
             <Menu.Item
             name='logout'
             onClick={this.handleLogout}
