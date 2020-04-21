@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
+// pages
 import Menu from './components/Menu'
 
 import Home from './pages/Home'
@@ -15,11 +16,16 @@ import ActivityDetail from './pages/ActivityDetail'
 import CreateActivity from './pages/CreateActivity'
 import EditActivity from './pages/EditActivity'
 
+// Hooks
+import useSession from './hooks/useSession'
+
 function App () {
+  const [{ session }] = useSession()
+
   return (
     <div className='App' data-testid='app'>
       <BrowserRouter>
-        <Menu />
+        <Menu session={session} />
         <Switch>
           <Route
             path='/places/new'
@@ -47,7 +53,7 @@ function App () {
           />
           <Route
             path='/activities/:id'
-            component={() => <ActivityDetail />}
+            component={() => <ActivityDetail session={session} />}
           />
           <Route
             path='/activities'

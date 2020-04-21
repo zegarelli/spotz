@@ -15,7 +15,10 @@ const useDataFetch = (initialUrl, initialPayload, initialSkip) => {
 
       if (url !== '') {
         try {
-          const res = await window.fetch(url, payload)
+          const res = await window.fetch(url, {
+            ...payload,
+            credentials: 'include'
+          })
           if (!res.ok) {
             setIsError(true)
           }

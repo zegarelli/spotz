@@ -19,7 +19,8 @@ const useDataPost = (initialUrl, initialPayload) => {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
               ...payload
-            })
+            }),
+            credentials: 'include'
           })
           if (!res.ok) {
             setIsError(true)
@@ -32,7 +33,7 @@ const useDataPost = (initialUrl, initialPayload) => {
             apiResult = isJson ? await res.json() : { result: await res.text() }
           }
           setApiResult(apiResult)
-        } catch (error) {
+        } catch (err) {
           setIsError(true)
         } finally {
           setIsLoading(false)
