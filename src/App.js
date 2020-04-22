@@ -16,6 +16,8 @@ import ActivityDetail from './pages/ActivityDetail'
 import CreateActivity from './pages/CreateActivity'
 import EditActivity from './pages/EditActivity'
 
+import Admin from './pages/admin/Admin'
+
 // Hooks
 import useSession from './hooks/useSession'
 
@@ -62,6 +64,10 @@ function App () {
           <Route
             path='/events'
             component={() => <Places />}
+          />
+          <Route
+            path='/admin'
+            component={() => <Admin />}
           />
           <Route
             path='/'
