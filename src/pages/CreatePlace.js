@@ -3,6 +3,7 @@ import { Header, Container, Button, Form, Message, Dimmer, Loader } from 'semant
 import { Redirect } from 'react-router-dom'
 import useDataFetch from '../hooks/fetchData'
 import useDataPost from '../hooks/postData'
+import getSessionCookie from '../common/session'
 
 function mapActivitiesDropDown (activities) {
   const options = []
@@ -16,10 +17,12 @@ function mapActivitiesDropDown (activities) {
   return options
 }
 
-function NewPlace (props) {
+function NewPlace () {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [selectedActivities, setSelectedActivities] = useState([])
+  const session = getSessionCookie()
+  const verified = session && session.verified
 
   const [{
     apiResult: activities,
@@ -36,7 +39,7 @@ function NewPlace (props) {
     setPayload
   ] = useDataPost('http://localhost:9000/places')
 
-  if (submitResult) {
+  if (!submitError && submitResult) {
     return <Redirect to={`/places/${submitResult.id}`} />
   }
 
@@ -54,13 +57,13 @@ function NewPlace (props) {
         </Dimmer>
         <Form onSubmit={handleSubmit} error={submitError}>
           <Container textAlign='right'>
-            <Form.Field control={Button}>Submit</Form.Field>
+            <Form.Field control={Button} disabled={!verified}>Submit</Form.Field>
           </Container>
           <Header as='h1'>New Place</Header>
           <Message
             error
             header='Error on Submission'
-            content={JSON.stringify(submitError)}
+            content={JSON.stringify(submitResult)}
           />
           <Form.Input fluid label='Place Name' placeholder='Place Name' onChange={e => setName(e.target.value)} />
           <Form.TextArea label='Description' placeholder='Tell us more about your new place...' onChange={e => setDescription(e.target.value)} />

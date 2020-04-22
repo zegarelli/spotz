@@ -3,6 +3,7 @@ import { Header, Container, Button, Form, Message, Dimmer, Loader } from 'semant
 import { Redirect, useParams } from 'react-router-dom'
 import useDataFetch from '../hooks/fetchData'
 import useDataPut from '../hooks/putData'
+import getSessionCookie from '../common/session'
 
 function mapActivitiesDropDown (activities) {
   const options = []
@@ -24,11 +25,13 @@ function extractActivityIds (placeActivities) {
   return activities
 }
 
-function EditPlace (props) {
+function EditPlace () {
   const { id } = useParams()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [selectedActivities, setSelectedActivities] = useState([])
+  const session = getSessionCookie()
+  const verified = session && session.verified
 
   const [{
     apiResult: place,
@@ -59,7 +62,7 @@ function EditPlace (props) {
     setPayload
   ] = useDataPut(`http://localhost:9000/places/${id}`)
 
-  if (submitResult) {
+  if (!submitError && submitResult) {
     return <Redirect to={`/places/${submitResult.id}`} />
   }
 
@@ -81,7 +84,7 @@ function EditPlace (props) {
             </Dimmer>
             <Form onSubmit={handleSubmit} error={submitError}>
               <Container textAlign='right'>
-                <Form.Field control={Button}>Submit</Form.Field>
+                <Form.Field control={Button} disabled={!verified}>Submit</Form.Field>
               </Container>
               <Header as='h1'>Edit Place</Header>
               <Message

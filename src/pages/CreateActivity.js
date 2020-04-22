@@ -3,6 +3,7 @@ import { Header, Container, Button, Form, Message, Dimmer, Loader } from 'semant
 import { Redirect } from 'react-router-dom'
 import useDataFetch from '../hooks/fetchData'
 import useDataPost from '../hooks/postData'
+import getSessionCookie from '../common/session'
 
 function mapPlacesDropDown (activities) {
   const options = []
@@ -20,6 +21,8 @@ function CreateActivity (props) {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [selectedPlaces, setSelectedPlaces] = useState([])
+  const session = getSessionCookie()
+  const verified = session && session.verified
 
   const [{
     apiResult: places,
@@ -55,7 +58,7 @@ function CreateActivity (props) {
         </Dimmer>
         <Form onSubmit={handleSubmit} error={submitError}>
           <Container textAlign='right'>
-            <Form.Field control={Button}>Submit</Form.Field>
+            <Form.Field control={Button} disabled={!verified}>Submit</Form.Field>
           </Container>
           <Header as='h1'>New Activity</Header>
           <Message

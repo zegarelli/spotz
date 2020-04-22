@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { Loader, Header, Grid, Image, Button } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
 import PlaceContainer from '../components/PlaceContainer'
+import getSessionCookie from '../common/session'
 
 function formatPlaces (placeActivities) {
   const places = []
@@ -16,10 +17,15 @@ function formatPlaces (placeActivities) {
   return places
 }
 
-function ActivityDetail (props) {
+function ActivityDetail () {
   const { id } = useParams()
-  const [{ apiResult: activity, isLoading, isError }] = useDataFetch(`http://localhost:9000/activities/${id}`)
-  const verified = props.session && props.session.verified
+  const [{
+    apiResult: activity,
+    isLoading,
+    isError
+  }] = useDataFetch(`http://localhost:9000/activities/${id}`)
+  const session = getSessionCookie()
+  const verified = session && session.verified
 
   return (
     <div className='ActivityDetail'>

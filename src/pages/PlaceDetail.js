@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { Loader, Header, Grid, Image, Button } from 'semantic-ui-react'
 import useDataFetch from '../hooks/fetchData'
 import ActivityContainer from '../components/ActivityContainer'
+import getSessionCookie from '../common/session'
 
 function formatActivities (placeActivities) {
   const activities = []
@@ -15,9 +16,15 @@ function formatActivities (placeActivities) {
   return activities
 }
 
-function PlaceDetail (props) {
+function PlaceDetail () {
   const { id } = useParams()
-  const [{ apiResult: place, isLoading, isError }] = useDataFetch(`http://localhost:9000/places/${id}`)
+  const [{
+    apiResult: place,
+    isLoading,
+    isError
+  }] = useDataFetch(`http://localhost:9000/places/${id}`)
+  const session = getSessionCookie()
+  const verified = session && session.verified
 
   return (
     <div className='PlaceDetail'>
@@ -34,7 +41,7 @@ function PlaceDetail (props) {
               <Image src='https://react.semantic-ui.com/images/wireframe/centered-paragraph.png' />
             </Grid.Column>
             <Grid.Column width={1}>
-              <Button primary as={Link} to={`/places/${id}/edit`}>Edit</Button>
+              <Button primary as={Link} to={`/places/${id}/edit`} disabled={!verified}>Edit</Button>
             </Grid.Column>
           </Grid.Row>
 

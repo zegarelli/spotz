@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { Menu, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Cookie from 'js-cookie'
+import getSessionCookie from '../common/session'
 
 export default class MenuInst extends Component {
   state = {}
+  session = getSessionCookie()
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   handleLogout = (e) => {
@@ -25,7 +27,7 @@ export default class MenuInst extends Component {
             <Input icon='search' placeholder='Search...' />
           </Menu.Item>
           {
-          !(this.props.session && this.props.session.username) ? 
+          !(this.session && this.session.username) ? 
           <Menu.Item
             as= 'a'
             href={`https://spotz.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=32hvc3lpimluo1ro0bc8p0pjm8&redirect_uri=${window.location.origin.toString()}`}
@@ -33,7 +35,7 @@ export default class MenuInst extends Component {
           /> 
           : 
           <>
-            <Menu.Item as={ Link } to='/profile' name={this.props.session.username}/>
+            <Menu.Item as={ Link } to='/profile' name={this.session.username}/>
             <Menu.Item
             name='logout'
             onClick={this.handleLogout}
