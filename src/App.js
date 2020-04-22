@@ -20,12 +20,12 @@ import EditActivity from './pages/EditActivity'
 import useSession from './hooks/useSession'
 
 function App () {
-  const [{ session }] = useSession()
+  useSession()
 
   return (
     <div className='App' data-testid='app'>
       <BrowserRouter>
-        <Menu session={session} />
+        <Menu />
         <Switch>
           <Route
             path='/places/new'
@@ -53,7 +53,7 @@ function App () {
           />
           <Route
             path='/activities/:id'
-            component={() => <ActivityDetail session={session} />}
+            component={() => <ActivityDetail />}
           />
           <Route
             path='/activities'
