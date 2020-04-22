@@ -20,7 +20,8 @@ const useDataPut = (initialUrl, initialPayload) => {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
               ...payload
-            })
+            }),
+            credentials: 'include'
           })
           if (!res.ok) {
             setIsError(true)
