@@ -59,8 +59,9 @@ function EditPlace () {
       isLoading: submitLoading,
       isError: submitError
     },
+    setUrl,
     setPayload
-  ] = useDataPut(`http://localhost:9000/places/${id}`)
+  ] = useDataPut()
 
   if (!submitError && submitResult) {
     return <Redirect to={`/places/${submitResult.id}`} />
@@ -69,6 +70,7 @@ function EditPlace () {
   const handleSubmit = function async (e) {
     e.preventDefault()
     const payload = { name, description, activities: selectedActivities }
+    setUrl(`http://localhost:9000/places/${id}`)
     setPayload(payload)
   }
 
@@ -92,7 +94,10 @@ function EditPlace () {
                 header='Error on Submission'
                 content='Something went wrong when submitting edits. Please Retry'
               />
-              <Form.Input fluid label='Place Name' placeholder='Place Name' onChange={e => setName(e.target.value)} value={name} />
+              <Form.Input
+                fluid label='Place Name' placeholder='Place Name'
+                onChange={e => setName(e.target.value)} value={name}
+              />
               <Form.TextArea label='Description' placeholder='Tell us more about your new place...' onChange={e => setDescription(e.target.value)} value={description} />
               <Form.Dropdown
                 label='Activities'
