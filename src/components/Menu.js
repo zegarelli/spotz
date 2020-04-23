@@ -11,6 +11,7 @@ export default class MenuInst extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   handleLogout = (e) => {
     Cookie.remove('session')
+    Cookie.remove('id_token')
     window.location.href = window.location.origin.toString()
   }
 
