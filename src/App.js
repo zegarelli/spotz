@@ -16,7 +16,7 @@ import ActivityDetail from './pages/ActivityDetail'
 import CreateActivity from './pages/CreateActivity'
 import EditActivity from './pages/EditActivity'
 
-import Admin from './pages/admin/Admin'
+import AdminRouter from './pages/admin/AdminRouter'
 
 // Hooks
 import useSession from './hooks/useSession'
@@ -67,7 +67,7 @@ function App () {
           />
           <Route
             path='/admin'
-            component={() => <Admin />}
+            component={() => <AdminRouter />}
           />
           <Route
             path='/'
