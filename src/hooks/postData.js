@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 const useDataPost = (initialUrl, initialPayload) => {
-  const [url] = useState(initialUrl)
+  const [url, setUrl] = useState(initialUrl)
   const [payload, setPayload] = useState(initialPayload)
   const [apiResult, setApiResult] = useState(undefined)
   const [isLoading, setIsLoading] = useState(true)
@@ -44,7 +44,7 @@ const useDataPost = (initialUrl, initialPayload) => {
     fetchData()
   }, [payload, url])
 
-  return [{ apiResult, isLoading, isError }, setPayload]
+  return [{ apiResult, isLoading, isError }, setUrl, setPayload]
 }
 
 export default useDataPost

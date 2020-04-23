@@ -36,8 +36,9 @@ function CreateActivity (props) {
       isLoading: submitLoading,
       isError: submitError
     },
+    setUrl,
     setPayload
-  ] = useDataPost('http://localhost:9000/activities')
+  ] = useDataPost()
 
   if (submitResult) {
     console.log(submitResult)
@@ -47,6 +48,7 @@ function CreateActivity (props) {
   const handleSubmit = function async (e) {
     e.preventDefault()
     const payload = { name, description, places: selectedPlaces }
+    setUrl('http://localhost:9000/activities')
     setPayload(payload)
   }
 
