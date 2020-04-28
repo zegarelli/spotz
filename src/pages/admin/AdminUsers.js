@@ -1,5 +1,6 @@
 import React from 'react'
-import { Header, Container, Loader, Table } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Header, Container, Loader, Table, Button } from 'semantic-ui-react'
 import useDataFetch from '../../hooks/fetchData'
 
 function AdminUsers () {
@@ -35,7 +36,10 @@ function AdminUsers () {
                       <Table.Cell>{user.created_at.slice(0, 10)}</Table.Cell>
                       <Table.Cell>{user.username}</Table.Cell>
                       <Table.Cell>{user.email}</Table.Cell>
-                      <Table.Cell>Scopes</Table.Cell>
+                      <Table.Cell>{user.scopes.map(scope => scope.name).join(', ')}</Table.Cell>
+                      <Table.Cell>
+                        <Button primary as={Link} to={`users/${user.id}`}>Edit</Button>
+                      </Table.Cell>
                     </Table.Row>
                   )
                 })}
