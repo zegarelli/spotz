@@ -78,7 +78,6 @@ function Scopes () {
       {!scopesError && scopesLoading && <Loader active />}
       {!scopesError && !scopesLoading && scopes &&
         <>
-          <Header>Scopes Again</Header>
           {scopes.map((scope, index) => {
             return (
               <Form key={scope.id} onSubmit={() => handleSubmit(index)}>
