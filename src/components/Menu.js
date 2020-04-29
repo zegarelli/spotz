@@ -31,7 +31,7 @@ export default class MenuInst extends Component {
           !(this.session && this.session.username) ? 
           <Menu.Item
             as= 'a'
-            href={`https://spotz.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=32hvc3lpimluo1ro0bc8p0pjm8&redirect_uri=${window.location.origin.toString()}`}
+            href={`https://spotz.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=32hvc3lpimluo1ro0bc8p0pjm8&redirect_uri=${window.location.origin.toString()}/auth`}
             name='login'
           /> 
           : 
