@@ -38,22 +38,27 @@ function FrontRouter () {
         component={() => <Places />}
       />
       <Route
+        exact
         path='/activities/new'
         component={() => <CreateActivity />}
       />
       <Route
+        exact
         path='/activities/:id/edit'
         component={() => <EditActivity />}
       />
       <Route
+        exact
         path='/activities/:id'
         component={() => <ActivityDetail />}
       />
       <Route
+        exact
         path='/activities'
         component={() => <Activities />}
       />
       <Route
+        exact
         path='/events'
         component={() => <Places />}
       />
