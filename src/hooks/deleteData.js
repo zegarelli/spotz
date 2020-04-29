@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const useDataPut = (initialUrl, initialPayload) => {
+const useDataDelete = (initialUrl, initialPayload) => {
   const [url, setUrl] = useState(initialUrl)
   const [payload, setPayload] = useState(initialPayload)
   const [apiResult, setApiResult] = useState(undefined)
@@ -14,9 +14,8 @@ const useDataPut = (initialUrl, initialPayload) => {
 
       if (payload) {
         try {
-          setIsLoading(true)
           const res = await window.fetch(url, {
-            method: 'PUT',
+            method: 'DELETE',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
               ...payload
@@ -34,7 +33,7 @@ const useDataPut = (initialUrl, initialPayload) => {
             apiResult = isJson ? await res.json() : { result: await res.text() }
           }
           setApiResult(apiResult)
-        } catch (error) {
+        } catch (err) {
           setIsError(true)
         } finally {
           setIsLoading(false)
@@ -48,4 +47,4 @@ const useDataPut = (initialUrl, initialPayload) => {
   return [{ apiResult, isLoading, isError }, setUrl, setPayload]
 }
 
-export default useDataPut
+export default useDataDelete

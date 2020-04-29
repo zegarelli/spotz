@@ -59,8 +59,9 @@ function EditActivity () {
       isLoading: submitLoading,
       isError: submitError
     },
+    setUrl,
     setPayload
-  ] = useDataPut(`http://localhost:9000/activities/${id}`)
+  ] = useDataPut()
 
   if (submitResult) {
     return <Redirect to={`/activities/${submitResult.id}`} />
@@ -69,6 +70,7 @@ function EditActivity () {
   const handleSubmit = function async (e) {
     e.preventDefault()
     const payload = { name, description, places: selectedPlaces }
+    setUrl(`http://localhost:9000/activities/${id}`)
     setPayload(payload)
   }
 

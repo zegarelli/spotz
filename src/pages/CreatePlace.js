@@ -36,8 +36,9 @@ function NewPlace () {
       isLoading: submitLoading,
       isError: submitError
     },
+    setUrl,
     setPayload
-  ] = useDataPost('http://localhost:9000/places')
+  ] = useDataPost()
 
   if (!submitError && submitResult) {
     return <Redirect to={`/places/${submitResult.id}`} />
@@ -46,6 +47,7 @@ function NewPlace () {
   const handleSubmit = function async (e) {
     e.preventDefault()
     const payload = { name, description, activities: selectedActivities }
+    setUrl('http://localhost:9000/places')
     setPayload(payload)
   }
 
