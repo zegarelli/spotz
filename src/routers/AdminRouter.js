@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import Scopes from './Scopes'
-import AdminUsers from './AdminUsers'
-import EditUserScopes from './EditUserScopes'
-import Admin from './Admin'
+import Scopes from '../pages/admin/Scopes'
+import AdminUsers from '../pages/admin/AdminUsers'
+import EditUserScopes from '../pages/admin/EditUserScopes'
+import Admin from '../pages/admin/Admin'
 
-import AdminMenu from '../../components/admin/AdminMenu'
+import AdminMenu from '../components/admin/AdminMenu'
 import { Grid } from 'semantic-ui-react'
 function AdminRouter () {
   return (

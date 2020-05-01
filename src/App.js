@@ -1,13 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import AdminRouter from './pages/admin/AdminRouter'
-import FrontRouter from './pages/frontRouter'
+import AdminRouter from './routers/AdminRouter'
+import FrontRouter from './routers/FrontRouter'
 
 import AuthRedirect from './pages/AuthRedirect'
 
 function App () {
-
   return (
     <div className='App' data-testid='app'>
       <BrowserRouter>
