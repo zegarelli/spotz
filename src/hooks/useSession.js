@@ -31,7 +31,8 @@ const useSession = () => {
             const session = {
               username: apiResult.username,
               email: apiResult.email,
-              verified: apiResult.verified
+              verified: apiResult.verified,
+              id: apiResult.id
             }
             console.log('setting session')
             Cookie.set('session', session)

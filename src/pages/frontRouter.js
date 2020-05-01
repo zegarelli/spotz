@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 import Home from './Home'
+import Profile from './Profile'
 
 import Places from './Places'
 import CreatePlace from './CreatePlace'
@@ -61,6 +62,11 @@ function FrontRouter () {
         exact
         path='/events'
         component={() => <Places />}
+      />
+      <Route
+        exact
+        path='/profile'
+        component={() => <Profile />}
       />
       <Route
         exact
