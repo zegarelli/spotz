@@ -1,9 +1,12 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Loader, Header, Grid, Image, Button } from 'semantic-ui-react'
-import useDataFetch from '../hooks/fetchData'
-import PlaceContainer from '../components/PlaceContainer'
+
 import getSessionCookie from '../common/session'
+
+import PlaceContainer from '../components/PlaceContainer'
+import useDataFetch from '../hooks/fetchData'
+import CommentThread from '../components/CommentThread'
 
 function formatPlaces (placeActivities) {
   const places = []
@@ -61,6 +64,7 @@ function ActivityDetail () {
             </Grid.Column>
           </Grid.Row>
         </Grid>}
+      <CommentThread objectId={id} />
     </div>
   )
 }
