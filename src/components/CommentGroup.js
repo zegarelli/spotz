@@ -20,12 +20,19 @@ function CommentGroup (props) {
                 <p>{comment.text}</p>
               </Comment.Text>
               <Comment.Actions>
-                <a onClick={() => setReplyId(comment.id)}>Reply</a>
+                <Comment.Action onClick={() => setReplyId(comment.id)}>Reply</Comment.Action>
               </Comment.Actions>
             </Comment.Content>
-            {replyId === comment.id && <AddComment objectId={props.objectId} parentId={comment.id} />}
+            {replyId === comment.id &&
+              <AddComment
+                objectId={props.objectId} parentId={comment.id} forceUpdate={props.forceUpdate}
+              />}
 
-            {comment.children && <CommentGroup comments={comment.children} objectId={props.objectId} />}
+            {comment.children &&
+              <CommentGroup
+                comments={comment.children}
+                objectId={props.objectId} forceUpdate={props.forceUpdate}
+              />}
           </Comment>
         )
       })}

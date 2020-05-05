@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import useDataPost from '../hooks/postData'
 
@@ -13,7 +13,13 @@ function AddComment (props) {
     setPostUrl, setPostPayload
   ] = useDataPost('')
 
-  const handleSubmit = function async () {
+  useEffect(() => {
+    if (apiResult) {
+      props.forceUpdate()
+    }
+  }, [apiResult, props])
+
+  const handleSubmit = function () {
     if (comment) {
       setPostUrl('http://localhost:9000/comments')
       setPostPayload({

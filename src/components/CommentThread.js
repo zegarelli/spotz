@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Header, Container, Loader } from 'semantic-ui-react'
 
 import CommentGroup from './CommentGroup'
@@ -10,7 +10,22 @@ function CommentThread (props) {
     apiResult: comments,
     isLoading,
     isError
-  }] = useDataFetch(`http://localhost:9000/comments?objectId=${props.objectId}`)
+  }, , setUrl] = useDataFetch('')
+  const [value, setValue] = useState(false)
+
+  useEffect(() => {
+    if (comments && !value) {
+      setUrl('')
+    }
+    if (!comments || value) {
+      setUrl(`http://localhost:9000/comments?objectId=${props.objectId}`)
+    }
+  }, [value, comments, setUrl, props.objectId])
+
+  const forceUpdate = function () {
+    setValue(true)
+  }
+
   return (
     <Container>
       <Header as='h3' dividing>
@@ -18,10 +33,10 @@ function CommentThread (props) {
       </Header>
       {isError && <b>Error</b>}
       {!isError && isLoading && <Loader active />}
-      {!isError && !isLoading &&
+      {!isError && !isLoading && comments &&
         <>
-          <CommentGroup comments={comments} objectId={props.objectId} />
-          <AddComment objectId={props.objectId} />
+          <CommentGroup comments={comments} objectId={props.objectId} forceUpdate={forceUpdate} />
+          <AddComment objectId={props.objectId} forceUpdate={forceUpdate} />
         </>}
     </Container>
   )
