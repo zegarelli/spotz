@@ -16,7 +16,7 @@ function ActivityCard (props) {
 
   return (
     <Item data-testid='activity'>
-      <Item.Image size='tiny' src='/images/bitmoji.png' />
+      <Item.Image size='tiny' src='https://spotzstatic.s3.us-east-2.amazonaws.com/bitmoji.png' />
       <Item.Content>
         <Item.Header as={Link} to={`/activities/${props.id}`}>{props.name}</Item.Header>
         <Item.Description>

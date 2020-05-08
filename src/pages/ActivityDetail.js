@@ -38,7 +38,7 @@ function ActivityDetail () {
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={3}>
-              <Image src='/images/bitmoji.png' />
+              <Image src='https://spotzstatic.s3.us-east-2.amazonaws.com/bitmoji.png' />
             </Grid.Column>
             <Grid.Column width={11}>
               <Header as='h1'>{activity.name}</Header>
