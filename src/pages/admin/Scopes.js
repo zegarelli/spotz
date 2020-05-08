@@ -11,7 +11,7 @@ function Scopes () {
     apiResult: returnedScopes,
     scopesLoading,
     scopesError
-  }] = useDataFetch('http://localhost:9000/scopes')
+  }] = useDataFetch('/api/scopes')
 
   const [
     {
@@ -45,13 +45,13 @@ function Scopes () {
     setSubmittedIndex(index)
     const scope = scopes[index]
     if (scope.id === 'new') {
-      setPostUrl('http://localhost:9000/scopes')
+      setPostUrl('/api/scopes')
       setPostPayload({
         description: scope.description,
         name: scope.name
       })
     } else {
-      setUrl(`http://localhost:9000/scopes/${scope.id}`)
+      setUrl(`/api/scopes/${scope.id}`)
       setPayload({
         description: scope.description,
         name: scope.name

@@ -13,11 +13,10 @@ const useSession = () => {
       const session = getSessionCookie()
       const tokens = getTokensFromUrl()
       if (!session && tokens) {
-        console.log('in')
         setIsLoading(true)
         try {
           const baseUrl = window.location.origin.toString() === 'http://localhost:3000' ? 'http://localhost:9000' : window.location.origin.toString()
-          const res = await window.fetch(`${baseUrl}/users/verify`, {
+          const res = await window.fetch(`${baseUrl}/api/users/verify`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
@@ -35,7 +34,6 @@ const useSession = () => {
               verified: apiResult.verified,
               id: apiResult.id
             }
-            console.log('setting session')
             Cookie.set('session', session)
             setSessionResult(true)
           } else {
@@ -43,7 +41,6 @@ const useSession = () => {
           }
         } catch (err) {
           setIsError(true)
-          console.log(err)
         } finally {
           setIsLoading(false)
         }

@@ -41,7 +41,6 @@ function CreateActivity (props) {
   ] = useDataPost()
 
   if (submitResult) {
-    console.log(submitResult)
     return <Redirect to={`/activities/${submitResult.id}`} />
   }
 

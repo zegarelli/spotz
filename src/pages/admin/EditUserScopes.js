@@ -31,13 +31,13 @@ function UserDetail () {
     apiResult: user,
     isLoading,
     isError
-  }] = useDataFetch(`http://localhost:9000/users/${id}`)
+  }] = useDataFetch(`/api/users/${id}`)
 
   const [{
     apiResult: scopesOptions,
     isLoading: scopeLoading,
     isError: scopeError
-  }] = useDataFetch('http://localhost:9000/scopes')
+  }] = useDataFetch('/api/scopes')
 
   const [
     {
@@ -66,16 +66,14 @@ function UserDetail () {
   }
 
   const handleRemoveScope = function (scopeId) {
-    console.log('new scope', scopeId)
-    setDeleteUrl(`http://localhost:9000/users/${id}/scope`)
+    setDeleteUrl(`/api/users/${id}/scope`)
     setDeletePayload({
       scopeId
     })
   }
 
   const handleAddScope = function (scopeId) {
-    console.log('new scope', scopeId)
-    setPostUrl(`http://localhost:9000/users/${id}/scope`)
+    setPostUrl(`/api/users/${id}/scope`)
     setPostPayload({
       scopeId
     })

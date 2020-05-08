@@ -21,7 +21,7 @@ function AddComment (props) {
 
   const handleSubmit = function () {
     if (comment) {
-      setPostUrl('http://localhost:9000/comments')
+      setPostUrl('/api/comments')
       setPostPayload({
         objectId: props.objectId,
         parentId: props.parentId,

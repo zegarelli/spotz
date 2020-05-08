@@ -18,7 +18,8 @@ function CommentThread (props) {
       setUrl('')
     }
     if (!comments || value) {
-      setUrl(`http://localhost:9000/comments?objectId=${props.objectId}`)
+      setUrl(`/api/comments?objectId=${props.objectId}`)
+      setValue(false)
     }
   }, [value, comments, setUrl, props.objectId])
 

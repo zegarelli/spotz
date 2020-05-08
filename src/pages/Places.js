@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import getSessionCookie from '../common/session'
 
 function Places () {
-  const [{ apiResult: places, isLoading, isError }] = useDataFetch('/places')
+  const [{ apiResult: places, isLoading, isError }] = useDataFetch('/api/places')
   const session = getSessionCookie()
   const verified = session && session.verified
 

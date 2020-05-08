@@ -8,7 +8,7 @@ function AdminUsers () {
     apiResult: users,
     isLoading: usersLoading,
     isError: usersError
-  }] = useDataFetch('http://localhost:9000/users')
+  }] = useDataFetch('/api/users')
 
   return (
     <div className='PlaceDetail'>
