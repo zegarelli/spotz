@@ -15,7 +15,7 @@ function Profile () {
   useEffect(() => {
     if (session && session.verified && session.id) {
       console.log('in', session)
-      setUrl(`http://localhost:9000/users/${session.id}`)
+      setUrl(`/api/users/${session.id}`)
     }
   }, [setUrl, session])
 

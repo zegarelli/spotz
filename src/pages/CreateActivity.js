@@ -28,7 +28,7 @@ function CreateActivity (props) {
     apiResult: places,
     isLoading: placesLoading,
     isError: placesError
-  }] = useDataFetch('http://localhost:9000/places')
+  }] = useDataFetch('/api/places')
 
   const [
     {
@@ -48,7 +48,7 @@ function CreateActivity (props) {
   const handleSubmit = function async (e) {
     e.preventDefault()
     const payload = { name, description, places: selectedPlaces }
-    setUrl('http://localhost:9000/activities')
+    setUrl('/api/activities')
     setPayload(payload)
   }
 

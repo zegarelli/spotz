@@ -28,7 +28,7 @@ function NewPlace () {
     apiResult: activities,
     isLoading: activitiesLoading,
     isError: activitiesError
-  }] = useDataFetch('http://localhost:9000/activities')
+  }] = useDataFetch('/api/activities')
 
   const [
     {
@@ -47,7 +47,7 @@ function NewPlace () {
   const handleSubmit = function async (e) {
     e.preventDefault()
     const payload = { name, description, activities: selectedActivities }
-    setUrl('http://localhost:9000/places')
+    setUrl('/api/places')
     setPayload(payload)
   }
 

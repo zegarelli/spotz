@@ -25,7 +25,7 @@ function PlaceDetail () {
     apiResult: place,
     isLoading,
     isError
-  }] = useDataFetch(`http://localhost:9000/places/${id}`)
+  }] = useDataFetch(`/api/places/${id}`)
   const session = getSessionCookie()
   const verified = session && session.verified
 

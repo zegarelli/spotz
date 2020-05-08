@@ -14,7 +14,8 @@ const useDataPost = (initialUrl, initialPayload) => {
 
       if (payload) {
         try {
-          const res = await window.fetch(url, {
+          const baseUrl = window.location.origin.toString() === 'http://localhost:3000' ? 'http://localhost:9000' : window.location.origin.toString()
+          const res = await window.fetch(baseUrl + url, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
