@@ -17,7 +17,7 @@ function Activities () {
   return (
     <div className='Activities'>
       <Container textAlign='right'>
-        <Button primary as={Link} to='/api/activities/new' disabled={!verified}>New</Button>
+        <Button primary as={Link} to='/activities/new' disabled={!verified}>New</Button>
       </Container>
       {isError && <b>Error</b>}
       {!isError && isLoading && <Loader active />}

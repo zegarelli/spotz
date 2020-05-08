@@ -13,7 +13,7 @@ function Places () {
   return (
     <div className='Places'>
       <Container textAlign='right'>
-        <Button primary as={Link} to='/api/places/new' disabled={!verified}>New</Button>
+        <Button primary as={Link} to='/places/new' disabled={!verified}>New</Button>
       </Container>
       <Item.Group>
         {isError && <b>Error</b>}
