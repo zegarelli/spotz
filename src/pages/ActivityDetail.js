@@ -26,7 +26,7 @@ function ActivityDetail () {
     apiResult: activity,
     isLoading,
     isError
-  }] = useDataFetch(`http://localhost:9000/activities/${id}`)
+  }] = useDataFetch(`/api/activities/${id}`)
   const session = getSessionCookie()
   const verified = session && session.verified
 

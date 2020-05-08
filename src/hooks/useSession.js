@@ -16,7 +16,8 @@ const useSession = () => {
         console.log('in')
         setIsLoading(true)
         try {
-          const res = await window.fetch('http://localhost:9000/users/verify', {
+          const baseUrl = window.location.origin.toString() === 'http://localhost:3000' ? 'http://localhost:9000' : window.location.origin.toString()
+          const res = await window.fetch(`${baseUrl}/users/verify`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({

@@ -37,7 +37,7 @@ function EditActivity () {
     apiResult: activity,
     isLoading: activityLoading,
     isError: activityError
-  }] = useDataFetch(`http://localhost:9000/activities/${id}`)
+  }] = useDataFetch(`/api/activities/${id}`)
 
   useEffect(() => {
     if (activity) {
@@ -51,7 +51,7 @@ function EditActivity () {
     apiResult: places,
     isLoading: placesLoading,
     isError: placesError
-  }] = useDataFetch('http://localhost:9000/places')
+  }] = useDataFetch('/api/places')
 
   const [
     {
@@ -70,7 +70,7 @@ function EditActivity () {
   const handleSubmit = function async (e) {
     e.preventDefault()
     const payload = { name, description, places: selectedPlaces }
-    setUrl(`http://localhost:9000/activities/${id}`)
+    setUrl(`/api/activities/${id}`)
     setPayload(payload)
   }
 
