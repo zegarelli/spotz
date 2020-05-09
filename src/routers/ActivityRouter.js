@@ -8,7 +8,7 @@ import EditActivity from '../pages/EditActivity'
 
 function ActivityRouter () {
   return (
-    <div className='FrontRouter'>
+    <div className='ActivityRouter'>
       <Switch>
         <Route
           path='/activities/new'
