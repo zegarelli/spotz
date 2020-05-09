@@ -22,7 +22,7 @@ jest.mock('../../pages/admin/EditUserScopes', () => {
   return () => <div data-testid='EditUserScopes' />
 })
 
-describe('FrontRouter.js', () => {
+describe('AdminRouter.js', () => {
   it('renders without crashing', () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/admin']}>
