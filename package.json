@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": true,
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "aws-sdk": "^2.673.0",
     "nodemon": "^1.19.4",
+    "mockdate": "^2.0.5",
     "standard": "^14.3.3"
   },
   "dependencies": {
