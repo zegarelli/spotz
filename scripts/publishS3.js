@@ -4,6 +4,8 @@ const path = require('path')
 const mime = require('mime')
 const AWS = require('aws-sdk')
 
+const pjson = require('../package.json')
+
 const AWS_KEY = process.env.AWS_KEY
 const AWS_SECRET = process.env.AWS_SECRET
 const S3_BUCKET = process.env.S3_BUCKET
@@ -19,25 +21,38 @@ const s3 = new AWS.S3({
   secretAccessKey: AWS_SECRET
 })
 
-const uploadFile = (filePath) => {
-  const fileContent = fs.readFileSync(filePath)
-  const filename = filePath.replace('static/', '')
-
-  const params = {
-    Bucket: S3_BUCKET,
-    StorageClass: S3_STORAGE_TYPE,
-    ACL: S3_ACL,
-    Key: filename,
-    ContentType: mime.getType(filePath),
-    Body: fileContent
+function makeS3FileName (filePath) {
+  if (filePath.match(/^\d.*.js$/)) {
+    return `builds/${pjson.version}/build-chunk.js`
+  } else if (filePath.match(/^main.*.js$/)) {
+    return `builds/${pjson.version}/main-chunk.js`
+  } else if (filePath.match(/^runtime-main.*.js$/)) {
+    return `builds/${pjson.version}/runtime-main.js`
   }
+}
 
-  s3.upload(params, function (err, data) {
-    if (err) {
-      throw err
+const uploadFile = (file, dir) => {
+  const filePath = path.join(dir, file)
+  const fileContent = fs.readFileSync(filePath)
+  const filename = makeS3FileName(file)
+
+  if (filename) {
+    const params = {
+      Bucket: S3_BUCKET,
+      StorageClass: S3_STORAGE_TYPE,
+      ACL: S3_ACL,
+      Key: filename,
+      ContentType: mime.getType(filePath),
+      Body: fileContent
     }
-    console.log('File uploaded successfully.', filePath)
-  })
+
+    s3.upload(params, function (err, data) {
+      if (err) {
+        throw err
+      }
+      console.log('File uploaded successfully.', filePath)
+    })
+  }
 }
 
 // const inS3 = (filePath, callback) => {
@@ -50,21 +65,18 @@ const uploadFile = (filePath) => {
 //   s3.getObject(params, callback)
 // }
 
-const walkSync = function (dir, filelist = []) {
-  fs.readdirSync(dir).forEach(function (file) {
-    filelist = fs.statSync(path.join(dir, file)).isDirectory()
-      ? walkSync(path.join(dir, file), filelist)
-      : filelist.concat(path.join(dir, file))
-  })
-  return filelist
+function getfiles (dir) {
+  // const filelist = []
+  const files = fs.readdirSync(dir)
+  return files
 }
 
 if (process.argv[2] === 'upload') {
-  // always upload style files to s3
-  const files = walkSync('./build')
+  const buildDir = './build/static/js'
+  const files = getfiles(buildDir)
   files.forEach(file => {
     // console.log("File: ", path.basename(file))
-    uploadFile(file)
+    uploadFile(file, buildDir)
   })
 } else {
   console.error('Invalid argument', process.argv[2])
