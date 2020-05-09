@@ -2,32 +2,32 @@
 
 import React from 'react'
 import { render } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import Activity from '../../components/ActivityCard'
 
 describe('Activity.js', () => {
   it('renders without crashing', () => {
     const { getByTestId } = render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Activity name='name' id='123' created_at='1234' />
-      </BrowserRouter>
+      </MemoryRouter>
     )
     expect(getByTestId('activity')).toBeTruthy()
   })
   it('adds the header', () => {
     const { getByText } = render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Activity name='name' id='123' created_at='1234' />
-      </BrowserRouter>
+      </MemoryRouter>
     )
     expect(getByText('name')).toBeTruthy()
   })
   it('checks props', () => {
     const spy = jest.spyOn(console, 'error').mockReturnValue('')
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Activity created_at={123} />
-      </BrowserRouter>
+      </MemoryRouter>
     )
     expect(spy).toHaveBeenCalledTimes(3)
     expect(spy).toHaveBeenCalledWith(expect.stringMatching(/Failed prop type: The prop `name` is marked as required in `ActivityCard`/))
