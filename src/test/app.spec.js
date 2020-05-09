@@ -5,19 +5,17 @@ import { render } from '@testing-library/react'
 import App from '../App'
 
 import { MemoryRouter } from 'react-router'
+
 jest.mock('../routers/AdminRouter', () => {
-  const AdminRouter = () => <div data-testid='adminRouter' />
-  return AdminRouter
+  return () => <div data-testid='adminRouter' />
 })
 
 jest.mock('../routers/FrontRouter', () => {
-  const FrontRouter = () => <div data-testid='frontRouter' />
-  return FrontRouter
+  return () => <div data-testid='frontRouter' />
 })
 
 jest.mock('../pages/AuthRedirect', () => {
-  const AuthRedirect = () => <div data-testid='authRedirect' />
-  return AuthRedirect
+  return () => <div data-testid='authRedirect' />
 })
 
 describe('App.js', () => {
