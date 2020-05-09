@@ -2,19 +2,23 @@ import React, { useState } from 'react'
 import { Comment } from 'semantic-ui-react'
 import AddComment from './AddComment'
 
+import { formatDate } from '../common/dateFormatter'
+const defaultProfilePic = 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg'
+
 function CommentGroup (props) {
   const [replyId, setReplyId] = useState('')
 
   return (
     <Comment.Group threaded>
       {props.comments.map(comment => {
+        const user = comment.user || { username: 'unknown user', extended_data: { profilePic: defaultProfilePic } }
         return (
           <Comment key={comment.id}>
-            <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
+            <Comment.Avatar as='a' src={user.extended_data && user.extended_data.profilePic ? user.extended_data.profilePic : defaultProfilePic} />
             <Comment.Content>
-              <Comment.Author as='a'>Elliot Fu</Comment.Author>
+              <Comment.Author as='a'>{user.username}</Comment.Author>
               <Comment.Metadata>
-                <span>Yesterday at 12:30AM</span>
+                <span>{formatDate(comment.created_at)}</span>
               </Comment.Metadata>
               <Comment.Text>
                 <p>{comment.text}</p>
