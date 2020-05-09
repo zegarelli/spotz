@@ -1,4 +1,4 @@
-/* global describe, it, expect, jest */
+/* global describe, it, expect, jest, beforeEach, afterEach */
 
 import React from 'react'
 import { render } from '@testing-library/react'
@@ -16,12 +16,18 @@ jest.mock('../../hooks/fetchData', function useDataFetch () {
   }
 })
 
-jest.mock('../../components/PlaceContainer', () => {
-  return jest.fn(({ children, ...rest }) => (
+jest.mock('../../components/PlaceContainer')
+
+beforeEach(function () {
+  PlaceContainer.mockImplementation(jest.fn(({ children, ...rest }) => (
     <div className='PlaceContainer' {...rest}>
       {typeof children === 'function' ? '[Child as a function]' : children}
     </div>
-  ))
+  )))
+})
+
+afterEach(() => {
+  jest.clearAllMocks()
 })
 
 describe('Places.js', () => {
@@ -40,9 +46,11 @@ describe('Places.js', () => {
         <Places />
       </MemoryRouter>
     )
+    debug()
     const places = container.querySelector('.PlaceContainer')
     expect(places).toBeTruthy()
-    expect(PlaceContainer).toHaveBeenCalledWith({ places: [{}, {}] }, {})
-    debug()
+    expect(PlaceContainer).toHaveBeenCalledTimes(1)
+    const PlaceContainerArgs = PlaceContainer.mock.calls[0][0]
+    expect(PlaceContainerArgs).toEqual({ places: [{}, {}] })
   })
 })
