@@ -20,11 +20,12 @@ jest.mock('../pages/AuthRedirect', () => {
 
 describe('App.js', () => {
   it('renders without crashing', () => {
-    const { getByTestId } = render(
+    const { container } = render(
       <MemoryRouter initialEntries={['/']}>
         <App />
       </MemoryRouter>)
-    expect(getByTestId('app')).toBeTruthy()
+    const app = container.querySelector('.App')
+    expect(app).toBeTruthy()
   })
   it('renders the FrontRouter', () => {
     const { getByTestId } = render(

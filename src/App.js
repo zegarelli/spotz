@@ -8,7 +8,7 @@ import AuthRedirect from './pages/AuthRedirect'
 
 function App () {
   return (
-    <div className='App' data-testid='app'>
+    <div className='App'>
       <BrowserRouter>
         <Switch>
           <Route
