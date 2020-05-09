@@ -8,7 +8,7 @@ import EditPlace from '../pages/EditPlace'
 
 function PlaceRouter () {
   return (
-    <div className='FrontRouter'>
+    <div className='PlaceRouter'>
       <Switch>
         <Route
           path='/places/new'
