@@ -1,10 +1,10 @@
 import React from 'react'
+import { Header } from 'semantic-ui-react'
 
 function Home () {
   return (
-    <div className='Places'>
-      <h1>Spots Home</h1>
-      <h1>{window.location.origin.toString()}</h1>
+    <div data-testid='home' className='Home'>
+      <Header as='h1'>Spotz Home</Header>
     </div>
   )
 }
