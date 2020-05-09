@@ -6,8 +6,6 @@ name: Node.js CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -26,3 +24,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm test
+    - name: Build
+      run: npm run build
+    - name: Upload to s3
+      run: node ./scripts/publishS3.js upload
+      env:
+        CI: true
+        AWS_KEY: ${{ secrets.AWS_KEY }}
+        AWS_SECRET: ${{ secrets.AWS_SECRET }}
+        S3_BUCKET: ${{ secrets.S3_BUCKET }}
