@@ -7,6 +7,7 @@ import {
 
 import useDataFetch from '../hooks/fetchData'
 import getSessionCookie from '../common/session'
+import { formatDate } from '../common/dateFormatter'
 
 function Profile () {
   const session = getSessionCookie()
@@ -32,11 +33,11 @@ function Profile () {
               Places
             </Header>
           </Divider>
-          <Table celled>
+          <Table celled id='place-table'>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell width={3} textAlign='center'>Name</Table.HeaderCell>
-                <Table.HeaderCell width={5} textAlign='center'>Desciption</Table.HeaderCell>
+                <Table.HeaderCell width={5} textAlign='center'>Description</Table.HeaderCell>
                 <Table.HeaderCell width={1} textAlign='center'>Spotz</Table.HeaderCell>
                 <Table.HeaderCell width={1} textAlign='center'>Created</Table.HeaderCell>
               </Table.Row>
@@ -48,7 +49,7 @@ function Profile () {
                     <Table.Cell><Link to={`/places/${place.id}`}>{place.name}</Link></Table.Cell>
                     <Table.Cell>{place.extended_data.description}</Table.Cell>
                     <Table.Cell>{1234}</Table.Cell>
-                    <Table.Cell>{place.created_at.split('T')[0]}</Table.Cell>
+                    <Table.Cell>{formatDate(place.created_at)}</Table.Cell>
                   </Table.Row>
                 )
               })}
@@ -61,11 +62,11 @@ function Profile () {
               Activities
             </Header>
           </Divider>
-          <Table celled>
+          <Table celled id='activity-table'>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell width={3} textAlign='center'>Name</Table.HeaderCell>
-                <Table.HeaderCell width={5} textAlign='center'>Desciption</Table.HeaderCell>
+                <Table.HeaderCell width={5} textAlign='center'>Description</Table.HeaderCell>
                 <Table.HeaderCell width={1} textAlign='center'>Spotz</Table.HeaderCell>
                 <Table.HeaderCell width={1} textAlign='center'>Created</Table.HeaderCell>
               </Table.Row>
@@ -77,7 +78,7 @@ function Profile () {
                     <Table.Cell><Link to={`/activities/${activity.id}`}>{activity.name}</Link></Table.Cell>
                     <Table.Cell>{activity.extended_data.description}</Table.Cell>
                     <Table.Cell>{1234}</Table.Cell>
-                    <Table.Cell>{activity.created_at.split('T')[0]}</Table.Cell>
+                    <Table.Cell>{formatDate(activity.created_at)}</Table.Cell>
                   </Table.Row>
                 )
               })}
