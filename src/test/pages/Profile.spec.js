@@ -21,10 +21,6 @@ beforeEach(function () {
   }))
 
   getSessionCookie.mockImplementation(jest.fn(function () {
-    return { verified: true, id: '1234' }
-  }))
-
-  getSessionCookie.mockImplementation(jest.fn(function () {
     return { verified: true }
   }))
 })
@@ -43,6 +39,74 @@ describe('Profile.js', function () {
     const places = container.querySelector('.Profile')
     expect(places).toBeTruthy()
   })
+  it('doesn\'t get data if the user isn\'t verified', function () {
+    useDataFetch.mockImplementation(jest.fn(function (url) {
+      if (url) {
+        apiResult = { places: [], activities: [] }
+        return [{ apiResult, isLoading: false, isError: false }]
+      }
+      return [{ apiResult: false, isLoading: false, isError: false }]
+    }))
+
+    getSessionCookie.mockImplementation(jest.fn(function () {
+      return { verified: true }
+    }))
+    const { container } = render(
+      <MemoryRouter>
+        <Profile />
+      </MemoryRouter>
+    )
+    const places = container.querySelector('.Profile')
+    expect(places).toBeTruthy()
+  })
+  it('gets data when the user is verified', function () {
+    const setUrlSpy = jest.fn()
+    const userId = '1234'
+
+    getSessionCookie.mockImplementation(jest.fn(function () {
+      return { verified: true, id: userId }
+    }))
+
+    useDataFetch.mockImplementation(jest.fn(function (url) {
+      if (url) {
+        apiResult = { places: [], activities: [] }
+        return [{ apiResult, isLoading: false, isError: false }]
+      }
+      return [{ apiResult: false, isLoading: false, isError: false }, '', setUrlSpy]
+    }))
+    const { container } = render(
+      <MemoryRouter>
+        <Profile />
+      </MemoryRouter>
+    )
+    const places = container.querySelector('.Profile')
+    expect(places).toBeTruthy()
+    expect(setUrlSpy.mock.calls[0][0]).toEqual(`/api/users/${userId}`)
+  })
+  it('displays error on fetchError', function () {
+    useDataFetch.mockImplementation(jest.fn(function () {
+      return [{ apiResult: false, isLoading: false, isError: true }]
+    }))
+    const { container } = render(
+      <MemoryRouter>
+        <Profile />
+      </MemoryRouter>
+    )
+    const errorText = container.querySelector('b').innerHTML
+    expect(errorText).toEqual('Error')
+  })
+  it('displays loading on fetchLoading', function () {
+    useDataFetch.mockImplementation(jest.fn(function () {
+      return [{ apiResult: false, isLoading: true, isError: false }]
+    }))
+    const { container } = render(
+      <MemoryRouter>
+        <Profile />
+      </MemoryRouter>
+    )
+    const loader = container.querySelector('.ui.active.loader')
+    expect(loader).toBeTruthy()
+  })
   describe('places table', function () {
     let profile
     beforeEach(function () {
@@ -55,13 +119,12 @@ describe('Profile.js', function () {
       useDataFetch.mockImplementation(jest.fn(function () {
         return [{ apiResult, isLoading: false, isError: false }]
       }))
-      const { container, debug } = render(
+      const { container } = render(
         <MemoryRouter>
           <Profile />
         </MemoryRouter>
       )
       profile = container
-      debug()
     })
     it('renders a table of places', function () {
       const table = profile.querySelector('#place-table')
@@ -102,13 +165,12 @@ describe('Profile.js', function () {
       useDataFetch.mockImplementation(jest.fn(function () {
         return [{ apiResult, isLoading: false, isError: false }]
       }))
-      const { container, debug } = render(
+      const { container } = render(
         <MemoryRouter>
           <Profile />
         </MemoryRouter>
       )
       profile = container
-      debug()
     })
     it('renders a table of activities', function () {
       const table = profile.querySelector('#activity-table')
